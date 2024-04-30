@@ -14,7 +14,7 @@ export const MainView = () => {
       .then((data) => {
         console.log(data)
       })
-    setBooks(booksFromApi);
+    //setMovies(moviesFromApi);
   },
     []);
 
