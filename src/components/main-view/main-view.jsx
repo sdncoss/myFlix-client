@@ -11,18 +11,27 @@ export const MainView = () => {
   useEffect(() => {
     fetch("https://my-flix-db-975de3fb6719.herokuapp.com/movies")
       .then((response) => response.json())
-      .then((data) => {
-        console.log(data)
-      })
-    //setMovies(moviesFromApi);
-  },
-    []);
+      .then((movies) => {
+        console.log(movies);
+        const moviesFromApi = movies.map((movie) => {
+          return {
+            id: movie._id,
+            title: movie.title,
+            description: movie.description,
+            imagePath: movie.imagePath,
+            genre: movie.genre,
+            director: movie.director
+          };
+        });
+        setMovies(moviesFromApi);
+      });
+  }, []);
 
   if (selectedMovie) {
     return (
       <MovieView movie={selectedMovie} onBackClick={() => setSelectedMovie(null)} />
     );
-  }
+  };
 
   if (movies.length === 0) {
     return <div>The list is empty!</div>;
@@ -32,10 +41,9 @@ export const MainView = () => {
     <div>
       {movies.map((movie) => (
         <MovieCard
-          key={movie.id}
           movie={movie}
           onMovieClick={(newSelectedMovie) => {
-            setSelectedMovie(newSelectedMovie);
+            setSelectedMovie(newSelectedMoviemovie);
           }}
         />
       ))}
