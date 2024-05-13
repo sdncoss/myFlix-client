@@ -2,9 +2,8 @@ import { useState, useEffect } from "react";
 import { MovieCard } from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view";
 import { LoginView } from "../login-view/login-view";
-import { SignupView } from "../signup-view/signup-view"
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
+import { SignupView } from "../signup-view/signup-view";
+import { Row, Button, Col } from "react-bootstrap";
 
 
 export const MainView = () => {
@@ -45,7 +44,7 @@ export const MainView = () => {
   return (
     <Row className="justify-content-md-center">
       {!user ? (
-        <Col md={f}>
+        <Col md={4}>
           <LoginView onLoggedIn={(user, token) => {
             setUser(user);
             setToken(token);
@@ -73,11 +72,11 @@ export const MainView = () => {
           ))}
         </>
       )} : (
-      <button onClick={() => {
+      <Button onClick={() => {
         setUser(null); setToken(null); localStorage.clear();
       }}>
         Logout
-      </button>
+      </Button>
       )
     </Row>
   );
