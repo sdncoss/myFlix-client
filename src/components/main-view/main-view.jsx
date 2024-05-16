@@ -9,6 +9,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { NavigationBar } from "../navigation-bar/navigation-bar";
 
 
+
 export const MainView = () => {
   const storedUser = JSON.parse(localStorage.getItem("user"));
   const storedToken = localStorage.getItem("token");
@@ -32,11 +33,18 @@ export const MainView = () => {
         const moviesFromApi = movies.map((movie) => {
           return {
             id: movie._id,
-            title: movie.title,
-            description: movie.description,
-            imagePath: movie.imagePath,
-            genre: movie.genre,
-            director: movie.director
+            title: movie.Title,
+            description: movie.Description,
+            imagePath: movie.ImagePath,
+            featured: movie.Featured,
+            genre: {
+              name: movie.Genre.Name,
+              description: movie.Genre.Description
+            },
+            director: {
+              name: movie.Director.Name,
+              bio: movie.Director.Bio
+            }
           };
         });
         setMovies(moviesFromApi);
